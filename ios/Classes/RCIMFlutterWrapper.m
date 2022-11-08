@@ -2127,7 +2127,11 @@ static NSString * const VER = @"5.1.8";
 - (void)onChatRoomJoinFailed:(NSString *)chatroomId errorCode:(RCErrorCode)errorCode{
     NSMutableDictionary *callbackDic = [NSMutableDictionary new];
     [callbackDic setValue:chatroomId forKey:@"targetId"];
-    [callbackDic setValue:@(errorCode) forKey:@"status"];
+    if (errorCode == 0) {
+        [callbackDic setValue:@(-1) forKey:@"status"];
+    } else {
+	[callbackDic setValue:@(errorCode) forKey:@"status"];
+    }
     [self.channel invokeMethod:RCMethodCallBackKeyJoinChatRoom arguments:callbackDic];
 }
 
