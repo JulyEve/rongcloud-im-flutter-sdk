@@ -2237,7 +2237,8 @@ public class RCIMFlutterWrapper implements MethodChannel.MethodCallHandler {
             field = client.getClass().getDeclaredField("mRegCache");
             field.setAccessible(true);
 //            List<String> mRegCache = (List) field.get(client)
-            List<String> mRegCache = new ArrayList<>((List) field.get(client));
+            // List<String> mRegCache = new ArrayList<>((List) field.get(client));
+            List<String> mRegCache = new ArrayList<>((Collection) field.get(client));
             for (String className : mRegCache) {
                 registerMessageType(className);
             }
